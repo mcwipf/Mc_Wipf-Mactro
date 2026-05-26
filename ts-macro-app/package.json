@@ -1,0 +1,196 @@
+{
+  "name": "ts-macro-app",
+  "version": "1.0.0",
+  "description": "TypeScript macro desktop app with React renderer",
+  "main": "dist/main.js",
+  "scripts": {
+    "prepare:icon": "node ./scripts/prepare-icon.mjs",
+    "build:main": "tsc -p tsconfig.json",
+    "build:renderer": "vite build --config renderer/vite.config.ts",
+    "build": "npm run build:main && npm run build:renderer",
+    "start": "npm run build && electron ./dist/main.js",
+    "dev": "npm run build && electron ./dist/main.js",
+    "typecheck": "npm run build:main -- --noEmit",
+    "pack:win": "npm run prepare:icon && npm run build && electron-builder --win --dir",
+    "dist:win": "npm run prepare:icon && npm run build && set CSC_IDENTITY_AUTO_DISCOVERY=false&& electron-builder --win nsis portable && node ./scripts/postdist-cleanup.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@nut-tree-fork/nut-js": "^4.2.6",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "uiohook-napi": "^1.5.5"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "@types/react": "^19.2.15",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.2",
+    "electron": "^42.2.0",
+    "electron-builder": "^26.0.12",
+    "rcedit": "^5.0.2",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.14"
+  },
+  "build": {
+    "appId": "com.mcwipf.macro",
+    "productName": "Mc_Wipf Macro",
+    "artifactName": "${productName}-${version}-${arch}.${ext}",
+    "directories": {
+      "output": "release"
+    },
+    "afterPack": "scripts/after-pack.cjs",
+    "beforeBuild": "scripts/before-build.cjs",
+    "files": [
+      "**/*",
+      "!src/**",
+      "!renderer/**",
+      "!tsconfig.json",
+      "!scripts/**",
+      "!release/**",
+      "!macro_app_data.json",
+      "!settings.json",
+      "!*.bat",
+      {
+        "from": "node_modules",
+        "to": "node_modules",
+        "filter": [
+          "@jimp/**",
+          "@nut-tree-fork/**",
+          "@tokenizer/**",
+          "abort-controller/**",
+          "any-base/**",
+          "arch/**",
+          "base64-js/**",
+          "bindings/**",
+          "bmp-js/**",
+          "buffer/**",
+          "buffer-equal/**",
+          "centra/**",
+          "clipboardy/**",
+          "cross-spawn/**",
+          "dom-walk/**",
+          "end-of-stream/**",
+          "events/**",
+          "event-target-shim/**",
+          "execa/**",
+          "exif-parser/**",
+          "file-type/**",
+          "file-uri-to-path/**",
+          "follow-redirects/**",
+          "get-stream/**",
+          "gifwrap/**",
+          "global/**",
+          "ieee754/**",
+          "image-q/**",
+          "is-docker/**",
+          "isexe/**",
+          "is-function/**",
+          "isomorphic-fetch/**",
+          "is-stream/**",
+          "is-wsl/**",
+          "jimp/**",
+          "jpeg-js/**",
+          "load-bmfont/**",
+          "mime/**",
+          "min-document/**",
+          "nice-try/**",
+          "node-abort-controller/**",
+          "node-fetch/**",
+          "node-gyp-build/**",
+          "npm-run-path/**",
+          "omggif/**",
+          "once/**",
+          "pako/**",
+          "parse-bmfont-ascii/**",
+          "parse-bmfont-binary/**",
+          "parse-bmfont-xml/**",
+          "parse-headers/**",
+          "path-key/**",
+          "peek-readable/**",
+          "p-finally/**",
+          "phin/**",
+          "pixelmatch/**",
+          "pngjs/**",
+          "process/**",
+          "pump/**",
+          "react/**",
+          "react-dom/**",
+          "readable-stream/**",
+          "readable-web-to-node-stream/**",
+          "regenerator-runtime/**",
+          "safe-buffer/**",
+          "sax/**",
+          "scheduler/**",
+          "semver/**",
+          "shebang-command/**",
+          "shebang-regex/**",
+          "signal-exit/**",
+          "string_decoder/**",
+          "strip-eof/**",
+          "strtok3/**",
+          "timm/**",
+          "tinycolor2/**",
+          "token-types/**",
+          "tr46/**",
+          "uiohook-napi/**",
+          "utif2/**",
+          "webidl-conversions/**",
+          "whatwg-fetch/**",
+          "whatwg-url/**",
+          "which/**",
+          "wrappy/**",
+          "xhr/**",
+          "xml2js/**",
+          "xmlbuilder/**",
+          "xml-parse-from-string/**",
+          "xtend/**"
+        ]
+      }
+    ],
+    "asarUnpack": [
+      "node_modules/**/*.node"
+    ],
+    "extraResources": [
+      {
+        "from": "build/macro.ico",
+        "to": "icons/macro.ico"
+      }
+    ],
+    "win": {
+      "icon": "build/macro.ico",
+      "signAndEditExecutable": false,
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "artifactName": "${productName}-${version}-setup-${arch}.${ext}",
+      "installerIcon": "build/macro.ico",
+      "uninstallerIcon": "build/macro.ico",
+      "installerHeaderIcon": "build/macro.ico",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": "always",
+      "createStartMenuShortcut": true,
+      "shortcutName": "Mc_Wipf Macro"
+    },
+    "portable": {
+      "artifactName": "${productName}-${version}-portable-${arch}.${ext}"
+    }
+  }
+}
