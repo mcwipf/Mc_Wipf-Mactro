@@ -2,6 +2,18 @@
 
 A Windows desktop macro automation app built with Electron, TypeScript, and React. Create, manage, and run macros with mouse, keyboard, scroll, image detection, and more — all with a clean, themeable UI.
 
+## ⬇️ Download & Install
+
+**[→ Download Latest Release](https://github.com/mcwipf/Mc_Wipf-Mactro/releases/latest)**
+
+1. Download `Mc_Wipf Macro-1.0.0-setup-x64.exe`
+2. Run the installer
+3. Launch **Mc_Wipf Macro** from your desktop or Start Menu
+
+> Requires **Windows x64**.
+
+---
+
 ## Features
 
 - **Mouse actions** — click, move, press/release, scroll, relative move
@@ -14,12 +26,6 @@ A Windows desktop macro automation app built with Electron, TypeScript, and Reac
 - **Loop control** — set loop count and delay between loops
 - **Speed multiplier** — scale macro timing globally
 - **Customizable UI** — dark/light theme, custom colors for background, text, buttons, and outlines
-
-## Download
-
-Grab the latest installer from the [Releases](https://github.com/mcwipf/Mc_Wipf-Mactro/releases) page.
-
-> Requires **Windows x64**.
 
 ## Building from Source
 
