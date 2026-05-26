@@ -66,4 +66,4 @@ The output will be in the `release/` folder.
 
 ## License
 
-[MIT](LICENSE)
+[MIT](https://github.com/mcwipf/Mc_Wipf-Mactro/blob/main/ts-macro-app/LICENSE)
